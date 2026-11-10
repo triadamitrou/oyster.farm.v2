@@ -245,3 +245,24 @@ body {
 .site-header[data-solid="false"] {
   color: var(--color-ivory);
 }
+
+/* ------------------------------------------------------------- drift */
+
+/* A still photograph that moves like a slow film: a long push and pan. */
+@keyframes u-drift {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.16) translate3d(-1.5%, -2%, 0);
+  }
+}
+.u-drift {
+  animation: u-drift 32s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .u-drift {
+    animation: none;
+  }
+}

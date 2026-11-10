@@ -7,12 +7,14 @@ import { events, house, lines, serving, site } from "@/lib/site";
 export default function Home() {
   return (
     <>
-      {/* 1. The opening: their own film, dark, with the name set over it. */}
+      {/* 1. The opening: open sea from above, dark, with the name set over it.
+          Stock film (Pexels, "Drone Footage of Blue Water", Engin Akyurt), a
+          stand-in until the farm films its own water. */}
       <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-night pb-20 text-ivory sm:pb-28">
         <video
-          className="absolute inset-0 h-full w-full object-cover opacity-50"
-          src="/video/kelp.mp4"
-          poster="/img/kelp-underwater.jpg"
+          className="absolute inset-0 h-full w-full object-cover opacity-60"
+          src="/video/sea.mp4"
+          poster="/img/sea-poster.jpg"
           autoPlay
           muted
           loop
