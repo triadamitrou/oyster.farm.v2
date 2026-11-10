@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/*
+ * Jurassic Seafarms, the luxury house.
+ *
+ * The register is the great French oyster houses: deep night navy, an
+ * ivory page, sand gold and a darker bronze for small type. The type is
+ * the logo's own: Cormorant Garamond for the name and the titles, Jost,
+ * tracked wide, for the small capitals. The slate is the logo's lettering.
+ */
+@theme {
+  --color-night: #0c1524;
+  --color-navy: #14202e;
+  --color-slate: #3d5975;
+  --color-ivory: #f4f0e8;
+  --color-shell: #e9e3d7;
+  --color-sand: #e3c29e;
+  --color-bronze: #8c6a3a;
+  --color-ink: #1a2230;
+  --color-mute: #6b6a66;
+
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-jost);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+:root {
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+}
+
+* {
+  min-width: 0;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 350;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-sand);
+  color: var(--color-night);
+}
+
+:focus-visible {
+  outline: 1px solid var(--color-bronze);
+  outline-offset: 4px;
+}
+
+/* --------------------------------------------------------------- type */
+
+.u-serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+
+/* Small tracked capitals, the house's labels. */
+.u-cap {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 450;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.u-wrap {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  max-width: 90rem;
+}
+
+@layer components {
+  /* Square buttons, outlined, tracked: the house never rounds a corner. */
+  .u-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    padding: 0 2rem;
+    border: 1px solid currentColor;
+    font-size: 0.74rem;
+    font-weight: 450;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition:
+      background 500ms var(--ease-out-expo),
+      color 500ms var(--ease-out-expo),
+      border-color 500ms var(--ease-out-expo);
+  }
+  .u-btn:hover {
+    background: var(--color-night);
+    border-color: var(--color-night);
+    color: var(--color-ivory);
+  }
+  .u-btn--sand {
+    background: var(--color-sand);
+    border-color: var(--color-sand);
+    color: var(--color-night);
+  }
+  .u-btn--sand:hover {
+    background: transparent;
+    border-color: var(--color-sand);
+    color: var(--color-sand);
+  }
+  .u-btn--light {
+    color: var(--color-ivory);
+  }
+  .u-btn--light:hover {
+    background: var(--color-ivory);
+    border-color: var(--color-ivory);
+    color: var(--color-night);
+  }
+
+  .u-link {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+    padding-bottom: 3px;
+    transition: background-size 600ms var(--ease-out-expo);
+  }
+  .u-link:hover {
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+}
+
+/* A frame waiting for the house's own photograph. It says nothing. */
+.u-frame {
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.06), transparent 60%),
+    var(--color-navy);
+}
+.u-frame--light {
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.5), transparent 60%),
+    var(--color-shell);
+}
+
+/* ------------------------------------------------------------- reveal */
+
+[data-reveal] {
+  --d: 0ms;
+}
+[data-reveal="rise"] {
+  opacity: 0;
+  transform: translate3d(0, 1.4rem, 0);
+  transition:
+    opacity 1200ms var(--ease-out-expo) var(--d),
+    transform 1400ms var(--ease-out-expo) var(--d);
+}
+[data-reveal="fade"] {
+  opacity: 0;
+  transition: opacity 1600ms var(--ease-out-expo) var(--d);
+}
+[data-reveal="rise"].is-in,
+[data-reveal="fade"].is-in {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal="words"] .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.14em;
+}
+[data-reveal="words"] .word > span {
+  display: inline-block;
+  transform: translate3d(0, 110%, 0);
+  transition: transform 1300ms var(--ease-out-expo) var(--d);
+}
+[data-reveal="words"].is-in .word > span {
+  transform: none;
+}
+
+/*
+ * The curtain: a photograph is uncovered from the bottom up, slowly, and
+ * settles from a slight scale. The clip goes on a child, never on the
+ * observed element, or the observer never fires.
+ */
+[data-reveal="port"] {
+  overflow: hidden;
+}
+[data-reveal="port"] > * {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1700ms var(--ease-in-out-quart) var(--d);
+}
+[data-reveal="port"].is-in > * {
+  clip-path: inset(0 0 0 0);
+}
+[data-reveal="port"] img,
+[data-reveal="port"] video {
+  transform: scale(1.12);
+  transition: transform 2400ms var(--ease-out-expo) var(--d);
+}
+[data-reveal="port"].is-in img,
+[data-reveal="port"].is-in video {
+  transform: none;
+}
+
+/* The crescent from the logo, drawing itself. */
+[data-reveal="draw"] path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2400ms var(--ease-in-out-quart) var(--d);
+}
+[data-reveal="draw"].is-in path {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal] * {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+/* ------------------------------------------------------------ header */
+
+.site-header {
+  transition:
+    background 600ms var(--ease-out-expo),
+    color 600ms var(--ease-out-expo),
+    box-shadow 600ms var(--ease-out-expo);
+}
+.site-header[data-solid="true"] {
+  background: color-mix(in srgb, var(--color-ivory) 95%, transparent);
+  color: var(--color-ink);
+  box-shadow: 0 1px 0 rgba(20, 32, 46, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.site-header[data-solid="false"] {
+  color: var(--color-ivory);
+}
