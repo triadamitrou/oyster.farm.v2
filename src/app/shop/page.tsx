@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Opening, Title } from "@/components/Bits";
+import { Title } from "@/components/Bits";
+import Masthead from "@/components/Masthead";
 import { Reveal } from "@/components/Reveal";
 import ShopCounter from "@/components/ShopCounter";
 import { mailto, wholesale } from "@/lib/site";
@@ -9,7 +10,7 @@ export const metadata: Metadata = { title: "Shop", description: "Oysters, mussel
 export default function Page() {
   return (
     <>
-      <Opening cap="The shop" title="From the harbour" lede="For the table, and for the trade." image="/img/oyster-bags.jpg" alt="Oyster bags in a line across Portland Harbour" />
+      <Masthead folio="04" cap="The shop" lead="From the" em="harbour" lede="Oysters, mussels and Sugar Kelp from Portland Harbour. For the table, and for the trade." />
 
       <nav aria-label="Shop sections" className="border-b border-ink/15 bg-ivory">
         <div className="u-wrap flex gap-10 py-5">

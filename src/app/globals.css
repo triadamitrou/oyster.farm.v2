@@ -266,3 +266,28 @@ body {
     animation: none;
   }
 }
+
+/* The seal on a showcase opening turns slowly, once every half minute. */
+@keyframes u-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.u-turn {
+  animation: u-turn 30s linear infinite;
+  transform-origin: 50% 50%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .u-turn {
+    animation: none;
+  }
+}
+
+/* On a page with no photograph the header is dark from the start, and
+   sits clear on the ivory until the page moves. */
+.site-header[data-solid="true"][data-top="true"] {
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}

@@ -38,10 +38,14 @@ export default function Header() {
     };
   }, [open]);
 
-  const dark = solid && !open;
+  // Only the home page and the three product pages open on a photograph.
+  // Everywhere else the page starts ivory, so the header is dark from the top.
+  const path = (pathname ?? "/").replace(/\/$/, "") || "/";
+  const overPhoto = ["/", "/oysters", "/mussels", "/kelp"].includes(path);
+  const dark = (solid || !overPhoto) && !open;
 
   return (
-    <header ref={ref} data-solid={dark} className="site-header fixed inset-x-0 top-0 z-50">
+    <header ref={ref} data-solid={dark} data-top={!solid} className="site-header fixed inset-x-0 top-0 z-50">
       <div className="u-wrap flex h-20 items-center justify-between gap-8">
         <Link href="/" aria-label="Jurassic Seafarms, home" onClick={() => setOpen(false)} className="relative z-10 shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}

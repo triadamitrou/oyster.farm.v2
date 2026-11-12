@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Opening, Photo, Title } from "@/components/Bits";
+import { Photo, Title } from "@/components/Bits";
+import Masthead from "@/components/Masthead";
 import { Reveal, Words } from "@/components/Reveal";
 import ValuesRail from "@/components/ValuesRail";
 import { house, site } from "@/lib/site";
@@ -10,7 +11,7 @@ export const metadata: Metadata = { title: "The house", description: house.lede 
 export default function Page() {
   return (
     <>
-      <Opening cap={`The house, since ${site.since}`} title={house.title} lede={house.lede} image="/img/oyster-bags.jpg" alt="The farm's oyster lines in Portland Harbour" />
+      <Masthead folio="07" cap={`The house, since ${site.since}`} lead="Lydia" em="and Andy" lede={house.lede} />
 
       <section className="bg-ivory py-28 sm:py-40">
         <div className="u-wrap grid gap-14 lg:grid-cols-12">

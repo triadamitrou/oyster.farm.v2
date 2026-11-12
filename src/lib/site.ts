@@ -16,6 +16,18 @@
  *     cruise, recipes and how to shuck, values, shop for consumers and
  *     wholesale.
  *
+ * STOCK PHOTOGRAPHS (Pexels, free licence), standing in until the farm
+ * has its own styled photography; every file is named stock-*:
+ *   stock-oyster-plate  Rachel Claire, photo 5491014
+ *   stock-natural       photo 8112245
+ *   stock-mignonette    Elle Hughes, photo 2647936
+ *   stock-gathered      photo 9397240
+ *   stock-plate-lemon   cottonbro studio, photo 6953375
+ *   stock-mussels       Julia Filirovska, photo 8250719
+ *   stock-farm-1 to -4  Philippe Serrand, photos 18720409, 18720410,
+ *                       18716645, 18720411. These are oyster farms at
+ *                       Cancale, Brittany, not Portland Harbour.
+ *
  * DRAFT, for the farm to approve: the process steps for mussels, the
  * tasting notes, pack sizes and the event formats are written for this
  * mock-up from the brief, not published by the farm. No prices, names,
@@ -64,6 +76,8 @@ export type Line = {
   steps: Step[];
   /** Extra blocks, used by the kelp page for benefits and uses. */
   uses?: { title: string; body: string }[];
+  /** A full-screen opening in place of the usual one: a line, its last words in italic. */
+  showcase?: { image: string; alt: string; lead: string; em: string };
 };
 
 export const lines: Line[] = [
@@ -77,6 +91,12 @@ export const lines: Line[] = [
       "Premium, high-yield oysters, grown larger than usual in the sheltered water of Portland Harbour, using a system the farm developed for this one stretch of sea. No feed, no chemicals, no fresh water: they take everything they need from the tide, and leave the harbour cleaner for it.",
     image: "/img/oysters-pile.jpg",
     alt: "A heap of freshly lifted Pacific Oysters",
+    showcase: {
+      image: "/img/stock-oyster-plate.jpg",
+      alt: "Three opened oysters on a white plate with lemon, seen from above on a dark table",
+      lead: "An oyster worth",
+      em: "the journey",
+    },
     notes: [
       { label: "Grown", value: "Portland Harbour, Dorset" },
       { label: "Character", value: "Large, full, high yield" },
@@ -236,18 +256,20 @@ export const wholesale = {
 /* -------------------------------------------------------------- serving */
 
 export const serving = [
-  { title: "Natural", body: "Nothing but the oyster. Perhaps a drop of lemon." },
-  { title: "Mignonette", body: "Shallot, red wine vinegar, cracked pepper." },
-  { title: "Gathered", body: "A platter on ice, and the table becomes an occasion." },
+  { title: "Natural", body: "Nothing but the oyster. Perhaps a drop of lemon.", image: "/img/stock-natural.jpg", alt: "Opened oysters on a dark stone surface" },
+  { title: "Mignonette", body: "Shallot, red wine vinegar, cracked pepper.", image: "/img/stock-mignonette.jpg", alt: "A round platter of oysters with a bowl of mignonette at its centre" },
+  { title: "Gathered", body: "A platter on ice, and the table becomes an occasion.", image: "/img/stock-gathered.jpg", alt: "Rows of opened oysters on crushed ice" },
 ];
 
 /* -------------------------------------------------------------- recipes */
 
-export type Recipe = { slug: string; title: string; line: string; time: string; serves: string; ingredients: string[]; method: string[] };
+export type Recipe = { slug: string; image?: string; alt?: string; title: string; line: string; time: string; serves: string; ingredients: string[]; method: string[] };
 
 export const recipes: Recipe[] = [
   {
     slug: "mignonette",
+    image: "/img/stock-plate-lemon.jpg",
+    alt: "Oysters on a plate of ice with lemon, from above",
     title: "Oysters, shallot mignonette",
     line: "The classic, and still the best.",
     time: "10 minutes",
@@ -266,6 +288,8 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "moules",
+    image: "/img/stock-mussels.jpg",
+    alt: "A wide pan of steamed mussels",
     title: "Mussels, cider and cream",
     line: "A West Country pot.",
     time: "25 minutes",
@@ -299,6 +323,12 @@ export const events = [
     kicker: "On the water",
     title: "Farm tours",
     body: "Out across Portland Harbour to the lines themselves: see the oysters lifted, the kelp on its ropes, and taste them where they grow.",
+    stills: [
+      { src: "/img/stock-farm-1.jpg", alt: "Oyster racks at low tide with boats moored beyond" },
+      { src: "/img/stock-farm-2.jpg", alt: "Rows of oyster racks stretching out across a bay" },
+      { src: "/img/stock-farm-3.jpg", alt: "A tractor working among oyster racks at low tide" },
+      { src: "/img/stock-farm-4.jpg", alt: "A sheltered bay with oyster beds along the shore" },
+    ],
   },
   {
     key: "cruise",

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Opening, Title } from "@/components/Bits";
+import Image from "next/image";
+import { Title } from "@/components/Bits";
+import Masthead from "@/components/Masthead";
 import { Reveal } from "@/components/Reveal";
 import { recipes, shuck } from "@/lib/site";
 
@@ -8,7 +10,7 @@ export const metadata: Metadata = { title: "Recipes", description: "How to shuck
 export default function Page() {
   return (
     <>
-      <Opening cap="In the kitchen" title="Recipes" lede="How to open an oyster, and what to do with it afterwards." image="/img/oysters-crate.jpg" alt="Oysters being sorted by hand" />
+      <Masthead folio="05" cap="Recipes" lead="In the" em="kitchen" lede="How to open an oyster, and what to do with it afterwards." />
 
       {/* How to shuck: four numbered moves. */}
       <section id="shuck" className="scroll-mt-24 bg-ivory py-28 sm:py-36">
@@ -34,7 +36,9 @@ export default function Page() {
             {recipes.map((r, i) => (
               <article key={r.slug} id={r.slug} className={`scroll-mt-28 ${i % 2 ? "md:mt-24" : ""}`}>
                 <Reveal mode="fade">
-                  <div className="u-frame aspect-[5/4]" />
+                  <div className={`relative aspect-[5/4] overflow-hidden ${r.image ? "" : "u-frame"}`}>
+                    {r.image ? <Image src={r.image} alt={r.alt ?? ""} fill sizes="(min-width:768px) 45vw, 100vw" className="object-cover" /> : null}
+                  </div>
                 </Reveal>
                 <p className="u-cap mt-7 text-bronze">
                   {r.time} &nbsp;/&nbsp; {r.serves}

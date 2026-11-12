@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Opening, Photo, Title } from "./Bits";
+import { Opening, Title } from "./Bits";
+import Showcase from "./Showcase";
+import ProcessRail from "./ProcessRail";
 import { Reveal } from "./Reveal";
 import { lines, mailto, type Line } from "@/lib/site";
 
@@ -8,9 +10,13 @@ export default function LinePage({ l }: { l: Line }) {
   const others = lines.filter((x) => x.slug !== l.slug);
   return (
     <>
-      <Opening cap={l.kicker} title={l.name} lede={l.line} image={l.image} alt={l.alt} />
+      {l.showcase ? (
+        <Showcase name={l.name} {...l.showcase} />
+      ) : (
+        <Opening cap={l.kicker} title={l.name} lede={l.line} image={l.image} alt={l.alt} />
+      )}
 
-      <section className="bg-ivory py-28 sm:py-36">
+      <section id="more" className="scroll-mt-20 bg-ivory py-28 sm:py-36">
         <div className="u-wrap grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="u-serif text-[1.5rem] italic text-mute">{l.latin}</p>
@@ -41,26 +47,8 @@ export default function LinePage({ l }: { l: Line }) {
         </div>
       </section>
 
-      {/* The process: numbered stages, photographs where the farm has them. */}
-      <section className="bg-night py-28 text-ivory sm:py-36">
-        <div className="u-wrap">
-          <Title cap="The process" title={`${l.steps.length === 4 ? "Four" : l.steps.length} stages, one harbour`} arc className="[&_.u-cap]:text-sand" />
-          <ol className="mt-20 grid gap-x-10 gap-y-16 md:grid-cols-2">
-            {l.steps.map((s, i) => (
-              <li key={s.title} className={i % 2 ? "md:mt-24" : ""}>
-                <Photo src={s.image ?? null} alt="" ratio="aspect-[5/4]" sizes="(min-width:768px) 45vw, 100vw" />
-                <div className="mt-6 flex items-baseline gap-5">
-                  <span className="u-serif text-[2.4rem] italic text-sand">{s.n}</span>
-                  <div>
-                    <h3 className="u-serif text-[2rem]">{s.title}</h3>
-                    <p className="mt-2 max-w-[42ch] text-ivory/70">{s.body}</p>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      {/* The process: a rail of small photographs with captions. */}
+      <ProcessRail title={`${{ oysters: "Oyster", mussels: "Mussel", kelp: "Kelp" }[l.slug]} farming`} steps={l.steps} />
 
       {l.uses ? (
         <section className="bg-shell py-28 sm:py-36">

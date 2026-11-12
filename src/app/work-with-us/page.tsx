@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Opening } from "@/components/Bits";
+import Masthead from "@/components/Masthead";
 import { Reveal } from "@/components/Reveal";
 import { mailto, site, work } from "@/lib/site";
 
@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Work with us", description: "Restaur
 export default function Page() {
   return (
     <>
-      <Opening cap="Work with us" title="Become a partner" lede="For kitchens, counters and makers who want the harbour on their side." image="/img/kelp-harvest.jpg" alt="Kelp harvested into the farm boat" />
+      <Masthead folio="08" cap="Work with us" lead="Become a" em="partner" lede="For kitchens, counters and makers who want the harbour on their side." />
 
       <section className="bg-ivory py-28 sm:py-36">
         <div className="u-wrap">

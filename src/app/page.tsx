@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Arc, Photo, Title } from "@/components/Bits";
 import { Reveal, Words } from "@/components/Reveal";
@@ -95,7 +96,9 @@ export default function Home() {
           <div className="mt-16 grid gap-10 md:grid-cols-3">
             {serving.map((s, i) => (
               <Reveal key={s.title} mode="rise" delay={i * 140} className={i === 1 ? "md:mt-16" : ""}>
-                <div className="u-frame aspect-[4/5]" />
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Image src={s.image} alt={s.alt} fill sizes="(min-width:768px) 30vw, 100vw" className="object-cover" />
+                </div>
                 <h3 className="u-serif mt-6 text-[1.9rem]">{s.title}</h3>
                 <p className="mt-2 max-w-[32ch] text-ink/70">{s.body}</p>
               </Reveal>

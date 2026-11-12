@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Opening } from "@/components/Bits";
+import Image from "next/image";
+import Masthead from "@/components/Masthead";
 import { Reveal } from "@/components/Reveal";
 import { events, mailto } from "@/lib/site";
 
@@ -13,7 +14,7 @@ export const metadata: Metadata = { title: "Events", description: "Farm tours, t
 export default function Page() {
   return (
     <>
-      <Opening cap="Events" title="On the water" lede="Farm tours, an evening cruise, and an oyster bar for your own occasion." image="/img/founders-boat.jpg" alt="Lydia and Andy heading out across the harbour" />
+      <Masthead folio="06" cap="Events" lead="On the" em="water" lede="Farm tours, an evening cruise, and an oyster bar for your own occasion." />
 
       {events.map((e, i) => (
         <section key={e.key} id={e.key} className={`scroll-mt-20 py-28 sm:py-36 ${i % 2 ? "bg-shell" : "bg-ivory"}`}>
@@ -43,9 +44,15 @@ export default function Page() {
               </div>
             </Reveal>
             <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {[0, 1, 2, 3].map((n) => (
+              {("stills" in e && e.stills ? e.stills : [null, null, null, null]).map((st, n) => (
                 <Reveal key={n} mode="rise" delay={n * 90}>
-                  <div className="u-frame aspect-[3/4]" />
+                  {st ? (
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <Image src={st.src} alt={st.alt} fill sizes="(min-width:640px) 25vw, 50vw" className="object-cover" />
+                    </div>
+                  ) : (
+                    <div className="u-frame aspect-[3/4]" />
+                  )}
                 </Reveal>
               ))}
             </div>
