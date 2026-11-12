@@ -30,7 +30,7 @@ export default function Home() {
           </Reveal>
           <Words
             as="h1"
-            text="The oyster of the Jurassic Coast"
+            text="Harvesting the future"
             className="u-serif mt-6 max-w-[13ch] text-[clamp(3.2rem,9.5vw,9rem)]"
             stagger={80}
           />
