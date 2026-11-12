@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Masthead from "@/components/Masthead";
 import { Reveal } from "@/components/Reveal";
-import { events, mailto } from "@/lib/site";
+import { events, inAction, mailto } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Events", description: "Farm tours, the oyster cruise and the oyster bar." };
 
@@ -15,6 +15,38 @@ export default function Page() {
   return (
     <>
       <Masthead folio="06" cap="Events" lead="On the" em="water" lede="Farm tours, an evening cruise, and an oyster bar for your own occasion." />
+
+      {/* In action: four tall tiles of silent, looping film. */}
+      <section aria-labelledby="in-action" className="bg-white py-20 sm:py-28">
+        <div className="u-wrap">
+          <div className="max-w-3xl">
+            <p className="u-cap text-bronze">{inAction.cap}</p>
+            <h2 id="in-action" className="u-serif mt-3 text-[clamp(2rem,3.4vw,2.8rem)]">
+              {inAction.title}
+            </h2>
+            <p className="mt-3 text-ink/65">{inAction.body}</p>
+          </div>
+          <div className="mt-10 grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
+            {inAction.clips.map((c, n) => (
+              <Reveal key={c.src} mode="rise" delay={n * 90}>
+                <div className="aspect-[3/4] overflow-hidden bg-shell">
+                  <video
+                    className="h-full w-full object-cover"
+                    src={c.src}
+                    poster={c.poster}
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                    preload="metadata"
+                    aria-label={c.label}
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {events.map((e, i) => (
         <section key={e.key} id={e.key} className={`scroll-mt-20 py-28 sm:py-36 ${i % 2 ? "bg-shell" : "bg-ivory"}`}>

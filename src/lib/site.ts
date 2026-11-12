@@ -344,6 +344,23 @@ export const events = [
   },
 ];
 
+/**
+ * "In action": four short silent loops. Stock film (Pexels, cottonbro
+ * studio, videos 6952919, 6952917, 6952922, 6952916), standing in until
+ * the farm films its own oyster bar.
+ */
+export const inAction = {
+  cap: "Our oyster bar",
+  title: "In action",
+  body: "A few moments from the table: oysters on ice, opened and laid out to order.",
+  clips: [
+    { src: "/video/action-1.mp4", poster: "/img/action-1.jpg", label: "An oyster being laid on crushed ice" },
+    { src: "/video/action-2.mp4", poster: "/img/action-2.jpg", label: "Hands arranging oysters on a plate of ice" },
+    { src: "/video/action-3.mp4", poster: "/img/action-3.jpg", label: "A plate of opened oysters with lemon, from above" },
+    { src: "/video/action-4.mp4", poster: "/img/action-4.jpg", label: "A plate of crushed ice with oysters behind" },
+  ],
+};
+
 /* --------------------------------------------------------------- values */
 
 export const values = [

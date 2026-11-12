@@ -1,40 +1,45 @@
 import type { Metadata } from "next";
-import Masthead from "@/components/Masthead";
+import Link from "next/link";
+import { Arc } from "@/components/Bits";
 import { Reveal } from "@/components/Reveal";
-import { mailto, site, work } from "@/lib/site";
+import { mailto, site } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Work with us", description: "Restaurants, retailers, ambassadors and kelp partners." };
+export const metadata: Metadata = { title: "Work with us", description: "Jurassic Seafarms welcomes volunteers on the farm in Portland Harbour." };
 
+/**
+ * One short page, no opening spread: the farm accepts volunteers, and
+ * this is how to get in touch. Trade buyers are pointed to the shop.
+ */
 export default function Page() {
   return (
-    <>
-      <Masthead folio="08" cap="Work with us" lead="Become a" em="partner" lede="For kitchens, counters and makers who want the harbour on their side." />
-
-      <section className="bg-ivory py-28 sm:py-36">
-        <div className="u-wrap">
-          <ul className="border-t border-ink/15">
-            {work.map((w, i) => (
-              <Reveal as="li" key={w.title} mode="rise" delay={i * 80} className="border-b border-ink/15">
-                <a href={mailto(`Work with us: ${w.subject}`)} className="group grid items-baseline gap-3 py-9 md:grid-cols-[auto_1.2fr_1.5fr_auto] md:gap-10">
-                  <span className="u-serif w-12 text-[1.8rem] italic text-bronze">{["I", "II", "III", "IV", "V"][i]}</span>
-                  <span className="u-serif text-[clamp(2rem,3.6vw,3rem)] transition-transform duration-700 group-hover:translate-x-3">{w.title}</span>
-                  <span className="text-ink/65">{w.body}</span>
-                  <span className="u-cap text-bronze">Write &rarr;</span>
-                </a>
-              </Reveal>
-            ))}
-          </ul>
+    <section className="flex min-h-[78svh] items-center bg-ivory pb-24 pt-40">
+      <div className="u-wrap">
+        <div className="max-w-[46rem]">
+          <Arc className="mb-5 w-14 text-bronze" />
+          <p className="u-cap text-bronze">Work with us</p>
+          <Reveal as="h1" mode="rise" className="u-serif mt-5 text-[clamp(2.6rem,6vw,5rem)]">
+            We welcome <em className="italic text-bronze">volunteers</em>
+          </Reveal>
+          <Reveal mode="rise" delay={150} className="mt-7 max-w-[46ch] text-[1.12rem] text-ink/75">
+            Jurassic Seafarms accepts volunteers on the farm in {site.farm}. To lend a hand, write to us and say a little
+            about yourself.
+          </Reveal>
+          <Reveal mode="fade" delay={300} className="mt-9 flex flex-wrap items-center gap-6">
+            <a href={mailto("Volunteering")} className="u-btn bg-night !text-ivory">
+              Volunteer
+            </a>
+            <a href={mailto("Volunteering")} className="u-link">
+              {site.email}
+            </a>
+          </Reveal>
+          <p className="mt-14 border-t border-ink/15 pt-6 text-[0.92rem] text-mute">
+            Buying for a restaurant or shop?{" "}
+            <Link href="/shop/#trade" className="u-link text-ink">
+              Wholesale
+            </Link>
+          </p>
         </div>
-      </section>
-
-      <section className="bg-night py-28 text-center text-ivory sm:py-36">
-        <div className="u-wrap">
-          <p className="u-cap text-sand">Or simply</p>
-          <a href={mailto()} className="u-serif u-link mt-6 inline-block text-[clamp(1.8rem,5vw,4rem)]">
-            {site.email}
-          </a>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

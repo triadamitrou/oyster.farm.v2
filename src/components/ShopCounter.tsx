@@ -36,12 +36,16 @@ export default function ShopCounter() {
       <div className="grid gap-x-10 gap-y-20 md:grid-cols-2 xl:grid-cols-3">
         {shop.consumer.map((it) => (
           <article key={it.key} className="flex flex-col">
-            <div className={`relative aspect-square overflow-hidden ${it.image ? "" : "u-frame"}`}>
-              {it.image ? <Image src={it.image} alt={it.alt} fill sizes="(min-width:1280px) 30vw, (min-width:768px) 45vw, 100vw" className="object-cover" /> : null}
+            <div className="flex items-start gap-5">
+              <div className={`relative h-24 w-24 shrink-0 overflow-hidden sm:h-28 sm:w-28 ${it.image ? "" : "u-frame"}`}>
+                {it.image ? <Image src={it.image} alt={it.alt} fill sizes="112px" className="object-cover" /> : null}
+              </div>
+              <div>
+                <p className="u-cap text-bronze">{it.kicker}</p>
+                <h3 className="u-serif mt-2 text-[2rem]">{it.name}</h3>
+                <p className="mt-1 text-[0.95rem] text-ink/65">{it.line}</p>
+              </div>
             </div>
-            <p className="u-cap mt-8 text-bronze">{it.kicker}</p>
-            <h3 className="u-serif mt-3 text-[2.4rem]">{it.name}</h3>
-            <p className="mt-2 text-ink/65">{it.line}</p>
 
             {it.grades ? (
               <div className="mt-6 flex items-center gap-4">
