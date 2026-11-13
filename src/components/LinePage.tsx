@@ -16,7 +16,7 @@ export default function LinePage({ l }: { l: Line }) {
         <Opening cap={l.kicker} title={l.name} lede={l.line} image={l.image} alt={l.alt} />
       )}
 
-      <section id="more" className="scroll-mt-20 bg-ivory py-28 sm:py-36">
+      <section id="more" className="scroll-mt-20 bg-ivory py-14 sm:py-36">
         <div className="u-wrap grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="u-serif text-[1.5rem] italic text-mute">{l.latin}</p>
@@ -51,7 +51,7 @@ export default function LinePage({ l }: { l: Line }) {
       <ProcessRail title={`${{ oysters: "Oyster", mussels: "Mussel", kelp: "Kelp" }[l.slug]} farming`} steps={l.steps} />
 
       {l.uses ? (
-        <section className="bg-shell py-28 sm:py-36">
+        <section className="bg-shell py-14 sm:py-36">
           <div className="u-wrap">
             <Title cap="Benefits and applications" title="One crop, many industries" />
             <div className="mt-14 grid gap-px bg-ink/15 md:grid-cols-3">

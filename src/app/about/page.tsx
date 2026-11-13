@@ -13,7 +13,7 @@ export default function Page() {
     <>
       <Masthead folio="07" cap={`The house, since ${site.since}`} lead="Lydia" em="and Andy" lede={house.lede} />
 
-      <section className="bg-ivory py-28 sm:py-40">
+      <section className="bg-ivory py-14 sm:py-40">
         <div className="u-wrap grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <Words
@@ -32,7 +32,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="bg-shell py-28 sm:py-36">
+      <section className="bg-shell py-14 sm:py-36">
         <div className="u-wrap grid items-center gap-12 md:grid-cols-2">
           <Photo src="/img/kelp-pontoon.jpg" alt="The farm boat at the pontoon, loaded with kelp" ratio="aspect-[4/5]" />
           <div>

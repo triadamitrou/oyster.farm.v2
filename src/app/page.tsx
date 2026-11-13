@@ -46,7 +46,7 @@ export default function Home() {
       </section>
 
       {/* 2. The house, in one sentence. */}
-      <section className="bg-ivory py-28 sm:py-40">
+      <section className="bg-ivory py-14 sm:py-40">
         <div className="u-wrap">
           <Reveal as="p" mode="fade" className="u-cap text-bronze">
             The house
@@ -61,15 +61,16 @@ export default function Home() {
       </section>
 
       {/* 3. Three lines: one row each, alternating. */}
-      <section aria-label="What the house grows" className="bg-ivory pb-28 sm:pb-40">
-        <div className="u-wrap grid gap-24 sm:gap-36">
+      <section aria-label="What the house grows" className="bg-ivory pb-14 sm:pb-40">
+        <div className="u-wrap">
+          <div className="-mx-[var(--gutter)] flex snap-x snap-mandatory gap-5 overflow-x-auto px-[var(--gutter)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:gap-36 md:overflow-visible md:px-0">
           {lines.map((l, i) => (
-            <article key={l.slug} className="grid items-center gap-10 md:grid-cols-12 md:gap-14">
+            <article key={l.slug} className="grid w-[80vw] shrink-0 snap-start content-start items-center gap-6 md:w-auto md:grid-cols-12 md:gap-14">
               <Photo
                 src={l.image}
                 alt={l.alt}
                 light
-                ratio={i === 0 ? "aspect-[4/5]" : "aspect-[5/4]"}
+                ratio={i === 0 ? "aspect-[5/4] md:aspect-[4/5]" : "aspect-[5/4]"}
                 sizes="(min-width:768px) 50vw, 100vw"
                 className={`md:col-span-6 ${i % 2 ? "md:order-2 md:col-start-7" : ""}`}
               />
@@ -86,16 +87,17 @@ export default function Home() {
               </div>
             </article>
           ))}
+          </div>
         </div>
       </section>
 
       {/* 4. Three ways to receive it. */}
-      <section className="bg-shell py-28 sm:py-36">
+      <section className="bg-shell py-14 sm:py-36">
         <div className="u-wrap">
           <Title cap="At the table" title="Three ways to receive it" arc className="text-center [&_svg]:mx-auto [&>div]:mx-auto" />
-          <div className="mt-16 grid gap-10 md:grid-cols-3">
+          <div className="mt-10 -mx-[var(--gutter)] flex snap-x snap-mandatory gap-5 overflow-x-auto px-[var(--gutter)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:mt-16 md:grid md:grid-cols-3 md:gap-10 md:overflow-visible md:px-0">
             {serving.map((s, i) => (
-              <Reveal key={s.title} mode="rise" delay={i * 140} className={i === 1 ? "md:mt-16" : ""}>
+              <Reveal key={s.title} mode="rise" delay={i * 140} className={`w-[64vw] shrink-0 snap-start md:w-auto ${i === 1 ? "md:mt-16" : ""}`}>
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <Image src={s.image} alt={s.alt} fill sizes="(min-width:768px) 30vw, 100vw" className="object-cover" />
                 </div>
@@ -142,7 +144,7 @@ export default function Home() {
       </section>
 
       {/* 7. On the water. */}
-      <section className="bg-ivory py-28 sm:py-36">
+      <section className="bg-ivory py-14 sm:py-36">
         <div className="u-wrap">
           <Title cap="Events" title="Come out on the water" />
           <ul className="mt-14 border-t border-ink/15">
@@ -167,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* 8. The people. */}
-      <section className="bg-shell py-28 sm:py-36">
+      <section className="bg-shell py-14 sm:py-36">
         <div className="u-wrap grid items-center gap-12 md:grid-cols-12">
           <Photo src="/img/founders-boat.jpg" alt="Lydia and Andy on the farm boat in Portland Harbour" ratio="aspect-square" className="md:col-span-5" />
           <div className="md:col-span-6 md:col-start-7">

@@ -12,8 +12,8 @@
  *   The farm, 8 November 2026: the oysters are premium, high yield and
  *     larger than usual.
  *   The brief ("oyster farms.pptx", 10 November 2026): mussels as a third
- *     line, the page list, ambassadors, events with film, farm tours, a
- *     cruise, recipes and how to shuck, values, shop for consumers and
+ *     line, the page list, ambassadors, events with film, farm tours,
+ *     recipes and how to shuck, values, shop for consumers and
  *     wholesale.
  *
  * STOCK PHOTOGRAPHS (Pexels, free licence), standing in until the farm
@@ -186,7 +186,7 @@ export const lineBySlug = (s: string) => lines.find((l) => l.slug === s);
 
 /* ---------------------------------------------------------------- shop */
 
-export type Pack = { label: string; price: number | null };
+export type Pack = { label: string; detail?: string; price: number | null };
 export type ShopItem = {
   key: string;
   kicker: string;
@@ -195,10 +195,20 @@ export type ShopItem = {
   image: string | null;
   alt: string;
   grades?: string[];
+  /** What a grade means, shown under the size buttons. */
+  gradeNote?: string;
+  /** A sentence or two for the product's own page. */
+  about: string;
+  /** Keeping and serving, in one line each. */
+  care: string[];
   packs: Pack[];
 };
 
-/** Pack sizes and grades are examples to agree with the farm. */
+/**
+ * Pack sizes follow how UK sellers usually offer them for collection:
+ * oysters by the half dozen and dozen with a size grade, mussels and
+ * kelp by weight. They are examples to agree with the farm.
+ */
 export const shop: { consumer: ShopItem[]; note: string } = {
   note: "Collection from Portland Harbour. Prices and collection times confirmed with the farm.",
   consumer: [
@@ -210,10 +220,14 @@ export const shop: { consumer: ShopItem[]; note: string } = {
       image: "/img/oysters-pile.jpg",
       alt: "Pacific Oysters, freshly lifted",
       grades: ["n°2", "n°3", "n°4"],
+      gradeNote: "The lower the number, the larger the oyster. n°3 is the classic size for the table.",
+      about: "Premium, high-yield Pacific Oysters, grown larger than usual in Portland Harbour and sorted by hand. Sold live, in the shell.",
+      care: ["Keep cold, cup side down, under a damp cloth.", "Best eaten within a few days of collection.", "Open just before serving."],
       packs: [
-        { label: "12 oysters", price: null },
-        { label: "24 oysters", price: null },
-        { label: "48 oysters", price: null },
+        { label: "Half dozen", detail: "6 oysters", price: null },
+        { label: "One dozen", detail: "12 oysters", price: null },
+        { label: "Two dozen", detail: "24 oysters", price: null },
+        { label: "Four dozen", detail: "48 oysters", price: null },
       ],
     },
     {
@@ -223,9 +237,12 @@ export const shop: { consumer: ShopItem[]; note: string } = {
       line: "Rope-grown in the same clean water.",
       image: null,
       alt: "",
+      about: "Mussels grown in the same clean harbour water as the oysters. Sold live, by weight.",
+      care: ["Keep cold and cook within a day or two.", "Allow about 500 g a person as a main course.", "Discard any that stay closed after cooking."],
       packs: [
-        { label: "1 kg", price: null },
-        { label: "2 kg", price: null },
+        { label: "1 kg", detail: "serves 2", price: null },
+        { label: "2 kg", detail: "serves 4", price: null },
+        { label: "5 kg", detail: "for a crowd", price: null },
       ],
     },
     {
@@ -233,11 +250,14 @@ export const shop: { consumer: ShopItem[]; note: string } = {
       kicker: "Grown alongside",
       name: "Sugar Kelp",
       line: "Subtly salty, rich in iodine.",
+      about: "Sugar Kelp grown on ropes beneath the oyster lines, with a subtly salty umami flavour. A little goes a long way.",
+      care: ["Keep chilled and use within a few days.", "Ideal for soups, salads and stocks."],
       image: "/img/kelp-rope.jpg",
       alt: "Sugar Kelp on its rope",
       packs: [
-        { label: "250 g", price: null },
-        { label: "500 g", price: null },
+        { label: "250 g", detail: "fresh", price: null },
+        { label: "500 g", detail: "fresh", price: null },
+        { label: "1 kg", detail: "fresh", price: null },
       ],
     },
   ],
@@ -263,11 +283,12 @@ export const serving = [
 
 /* -------------------------------------------------------------- recipes */
 
-export type Recipe = { slug: string; image?: string; alt?: string; title: string; line: string; time: string; serves: string; ingredients: string[]; method: string[] };
+export type Recipe = { slug: string; needs: string; image?: string; alt?: string; title: string; line: string; time: string; serves: string; ingredients: string[]; method: string[] };
 
 export const recipes: Recipe[] = [
   {
     slug: "mignonette",
+    needs: "12 oysters",
     image: "/img/stock-plate-lemon.jpg",
     alt: "Oysters on a plate of ice with lemon, from above",
     title: "Oysters, shallot mignonette",
@@ -279,6 +300,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "grilled",
+    needs: "12 oysters",
     title: "Grilled oysters, kelp butter",
     line: "Hot from the grill, the sea on top.",
     time: "20 minutes",
@@ -288,6 +310,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "moules",
+    needs: "1 kg mussels",
     image: "/img/stock-mussels.jpg",
     alt: "A wide pan of steamed mussels",
     title: "Mussels, cider and cream",
@@ -299,6 +322,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "kelp-salad",
+    needs: "20 g Sugar Kelp",
     title: "Sugar Kelp and cucumber salad",
     line: "Bright, cold and a little salty.",
     time: "15 minutes",
@@ -329,12 +353,6 @@ export const events = [
       { src: "/img/stock-farm-3.jpg", alt: "A tractor working among oyster racks at low tide" },
       { src: "/img/stock-farm-4.jpg", alt: "A sheltered bay with oyster beds along the shore" },
     ],
-  },
-  {
-    key: "cruise",
-    kicker: "The harbour",
-    title: "The oyster cruise",
-    body: "An evening on the water beneath the cliffs of Portland, with oysters shucked on board.",
   },
   {
     key: "bar",
@@ -385,5 +403,5 @@ export const work = [
   { title: "Fishmongers and shops", body: "Regular supply of oysters, mussels and kelp.", subject: "Retail" },
   { title: "Ambassadors", body: "Chefs and makers who share the farm's way of doing things.", subject: "Ambassadors" },
   { title: "Kelp partners", body: "Food, agriculture, cosmetics and biomaterials.", subject: "Kelp" },
-  { title: "Events", body: "Tours, the oyster cruise and the oyster bar.", subject: "Events" },
+  { title: "Events", body: "Tours and the oyster bar.", subject: "Events" },
 ];

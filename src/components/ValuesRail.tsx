@@ -43,7 +43,7 @@ export default function ValuesRail() {
         className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {values.map((v) => (
-          <article key={v.title} className="relative h-[70vh] min-h-[26rem] w-[78vw] shrink-0 snap-start overflow-hidden sm:w-[42vw] lg:w-[27vw]">
+          <article key={v.title} className="relative h-[52vh] min-h-[20rem] w-[72vw] sm:h-[70vh] sm:min-h-[26rem] shrink-0 snap-start overflow-hidden sm:w-[42vw] lg:w-[27vw]">
             <Image src={v.image} alt="" fill sizes="(min-width:1024px) 27vw, 78vw" className="object-cover opacity-70" />
             <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night via-transparent to-transparent" />
             <div className="absolute inset-x-5 bottom-5 bg-night/85 p-5 backdrop-blur-sm">

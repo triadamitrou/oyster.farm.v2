@@ -15,7 +15,7 @@ export default function ProcessRail({ title, steps }: { title: string; steps: St
   const move = (dir: number) => rail.current?.scrollBy({ left: dir * rail.current.clientWidth * 0.6, behavior: "smooth" });
 
   return (
-    <section aria-labelledby="process-title" className="border-t border-ink/10 bg-ivory py-24 sm:py-32">
+    <section aria-labelledby="process-title" className="border-t border-ink/10 bg-ivory py-12 sm:py-32">
       <div className="u-wrap flex items-end justify-between gap-8">
         <div>
           <p className="u-cap text-bronze">The process</p>
