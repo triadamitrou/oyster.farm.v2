@@ -25,29 +25,35 @@ export default function Page() {
             <BasketLink />
           </div>
 
-          <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:mt-12 sm:gap-x-8 lg:grid-cols-3">
+          {/* Box widgets: a small photograph, the name and the range, in a frame. */}
+          <ul className="mx-auto mt-8 grid max-w-[62rem] gap-4 sm:mt-12 sm:grid-cols-3 sm:gap-6">
             {shop.consumer.map((it, i) => (
-              <Reveal as="li" key={it.key} mode="rise" delay={i * 100} className={i === 0 ? "col-span-2 lg:col-span-1" : ""}>
-                <Link href={`/shop/${it.key}/`} className="group block">
-                  <div className={`relative overflow-hidden ${i === 0 ? "aspect-[16/10] lg:aspect-[4/5]" : "aspect-[4/5]"} ${it.image ? "" : "u-frame"}`}>
+              <Reveal as="li" key={it.key} mode="rise" delay={i * 100}>
+                <Link
+                  href={`/shop/${it.key}/`}
+                  className="group flex h-full items-center gap-4 border border-ink/15 bg-white/60 p-3 transition-colors duration-500 hover:border-night sm:block sm:p-4"
+                >
+                  <div className={`relative h-24 w-24 shrink-0 overflow-hidden sm:h-auto sm:w-auto sm:aspect-[4/3] ${it.image ? "" : "u-frame"}`}>
                     {it.image ? (
                       <Image
                         src={it.image}
                         alt={it.alt}
                         fill
-                        sizes="(min-width:1024px) 30vw, (min-width:640px) 46vw, 100vw"
-                        className="object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
+                        sizes="(min-width:640px) 20rem, 96px"
+                        className="object-cover transition-transform duration-[1200ms] group-hover:scale-[1.05]"
                       />
                     ) : null}
                   </div>
-                  <p className="u-cap mt-4 text-[0.62rem] text-bronze">{it.kicker}</p>
-                  <h2 className="u-serif mt-1 text-[1.6rem] sm:text-[2.1rem]">{it.name}</h2>
-                  <p className="mt-1 text-[0.92rem] text-ink/65">
-                    {it.packs[0].label} to {it.packs[it.packs.length - 1].label.toLowerCase()}
-                  </p>
-                  <span className="u-cap mt-3 inline-block border-b border-ink/40 pb-1 text-[0.62rem] transition-colors group-hover:border-bronze group-hover:text-bronze">
-                    Choose
-                  </span>
+                  <div className="sm:mt-4">
+                    <p className="u-cap text-[0.6rem] text-bronze">{it.kicker}</p>
+                    <h2 className="u-serif mt-1 text-[1.5rem] sm:text-[1.7rem]">{it.name}</h2>
+                    <p className="mt-0.5 text-[0.88rem] text-ink/65">
+                      {it.packs[0].label} to {it.packs[it.packs.length - 1].label.toLowerCase()}
+                    </p>
+                    <span className="u-cap mt-3 inline-block border-b border-ink/40 pb-1 text-[0.6rem] transition-colors group-hover:border-bronze group-hover:text-bronze">
+                      Choose
+                    </span>
+                  </div>
                 </Link>
               </Reveal>
             ))}
@@ -62,7 +68,7 @@ export default function Page() {
             <h2 className="u-serif mt-4 text-[clamp(2rem,4.4vw,3.8rem)]">{wholesale.title}</h2>
             <p className="mt-5 max-w-[42ch] text-ivory/75">{wholesale.body}</p>
             <a href={mailto("Wholesale enquiry")} className="u-btn u-btn--sand mt-8">
-              Open a trade account
+              Contact us
             </a>
           </div>
           <ul className="border-t border-ivory/15">

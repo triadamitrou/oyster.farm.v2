@@ -9,8 +9,10 @@
  * tracked wide, for the small capitals. The slate is the logo's lettering.
  */
 @theme {
-  --color-night: #0c1524;
-  --color-navy: #14202e;
+  /* The sea in the opening film, sampled from it: every dark ground on
+     the site is this blue, and empty frames are a shade lighter. */
+  --color-night: #1f2a45;
+  --color-navy: #2a3758;
   --color-slate: #3d5975;
   --color-ivory: #f4f0e8;
   --color-shell: #e9e3d7;
