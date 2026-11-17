@@ -16,9 +16,9 @@ export function BasketLink({ className = "" }: { className?: string }) {
   );
 }
 
-function Stepper({ value, onChange, label, min = 1 }: { value: number; onChange: (n: number) => void; label: string; min?: number }) {
+function Stepper({ value, onChange, label, min = 1, tall = false }: { value: number; onChange: (n: number) => void; label: string; min?: number; tall?: boolean }) {
   return (
-    <div role="group" aria-label={label} className="flex h-12 items-stretch border border-ink/25">
+    <div role="group" aria-label={label} className={`flex items-stretch border border-ink/25 ${tall ? "h-14" : "h-12"}`}>
       <button type="button" aria-label="One fewer" onClick={() => onChange(Math.max(min, value - 1))} className="w-11 text-lg hover:bg-ink/5">
         &minus;
       </button>
@@ -41,6 +41,7 @@ export function BuyBox({ item }: { item: ShopItem }) {
   const [pack, setPack] = useState(item.packs[Math.min(1, item.packs.length - 1)].label);
   const [qty, setQ] = useState(1);
   const [added, setAdded] = useState(false);
+  const [open, setOpen] = useState(false);
   const chosen = item.packs.find((p) => p.label === pack)!;
 
   const tile = (on: boolean) =>
@@ -62,43 +63,81 @@ export function BuyBox({ item }: { item: ShopItem }) {
         </fieldset>
       ) : null}
 
-      <fieldset className={item.grades ? "mt-7" : ""}>
-        <legend className="u-cap text-mute">Quantity</legend>
-        <div className="mt-3 grid grid-cols-2 gap-2">
-          {item.packs.map((p) => (
-            <button key={p.label} type="button" aria-pressed={pack === p.label} onClick={() => setPack(p.label)} className={tile(pack === p.label)}>
-              <span className="block">{p.label}</span>
-              {p.detail ? <span className="block text-[0.82rem] opacity-65">{p.detail}</span> : null}
+      {/* Pack as a drop-down, how many beside it, then one wide button. */}
+      <div className={`grid grid-cols-[1fr_auto] gap-3 ${item.grades ? "mt-7" : ""}`}>
+        <div>
+          <p className="u-cap text-mute" id={`pack-${item.key}`}>
+            Pack{chosen.price !== null ? <span className="text-ink"> &ndash; £{chosen.price}</span> : null}
+          </p>
+          <div
+            className="relative mt-3"
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") setOpen(false);
+            }}
+          >
+            <button
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded={open}
+              aria-labelledby={`pack-${item.key}`}
+              onClick={() => setOpen((v) => !v)}
+              className="flex h-14 w-full items-center justify-between gap-3 border border-ink/25 px-4 text-left"
+            >
+              <span className="truncate">
+                {chosen.label}
+                {chosen.detail ? <span className="text-mute"> &ndash; {chosen.detail}</span> : null}
+              </span>
+              <svg viewBox="0 0 12 8" aria-hidden="true" className={`h-2 w-3 shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}>
+                <path d="M0 0h12L6 8z" fill="currentColor" />
+              </svg>
             </button>
-          ))}
+            {open ? (
+              <ul role="listbox" aria-labelledby={`pack-${item.key}`} className="absolute inset-x-0 top-full z-20 -mt-px border border-ink/25 bg-white shadow-[0_18px_40px_-20px_rgba(31,42,69,0.5)]">
+                {item.packs.map((p) => (
+                  <li key={p.label} role="option" aria-selected={pack === p.label} className="border-b border-ink/15 last:border-0">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPack(p.label);
+                        setOpen(false);
+                      }}
+                      className={`flex w-full items-center justify-between gap-3 px-4 py-4 text-left transition-colors ${pack === p.label ? "bg-night text-ivory" : "hover:bg-ink/5"}`}
+                    >
+                      <span>
+                        {p.label}
+                        {p.detail ? <span className="opacity-70"> &ndash; {p.detail}</span> : null}
+                      </span>
+                      {p.price !== null ? <span className="tabular-nums">£{p.price}</span> : null}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
         </div>
-      </fieldset>
-
-      <div className="mt-7 flex items-center justify-between border-y border-ink/15 py-4">
-        <span className="u-cap text-mute">Price</span>
-        {chosen.price === null ? (
-          <span className="text-mute">On request</span>
-        ) : (
-          <span>
-            <span className="u-serif text-[1.8rem]">£{chosen.price * qty}</span> <span className="text-[0.9rem] text-mute">collected</span>
-          </span>
-        )}
+        <div>
+          <p className="u-cap text-mute">Quantity</p>
+          <div className="mt-3">
+            <Stepper value={qty} onChange={setQ} label="How many packs" tall />
+          </div>
+        </div>
       </div>
 
-      <div className="mt-6 flex gap-3">
-        <Stepper value={qty} onChange={setQ} label="How many packs" />
-        <button
-          type="button"
-          onClick={() => {
-            addToBasket({ key: item.key, name: item.name, pack, grade, qty });
-            setAdded(true);
-          }}
-          className="u-btn flex-1 bg-night !text-ivory"
-        >
-          Add to basket
-        </button>
-      </div>
-      <p aria-live="polite" className="mt-3 min-h-[1.5rem] text-[0.92rem]">
+      <button
+        type="button"
+        onClick={() => {
+          addToBasket({ key: item.key, name: item.name, pack, grade, qty });
+          setAdded(true);
+        }}
+        className="u-btn mt-4 min-h-[3.75rem] w-full bg-night !text-ivory"
+      >
+        Add to basket{chosen.price !== null ? ` \u2013 £${chosen.price * qty}` : ""}
+      </button>
+      {chosen.price === null ? <p className="mt-3 text-[0.88rem] text-mute">Price on request, confirmed by the farm before collection.</p> : null}
+      <p aria-live="polite" className="mt-2 min-h-[1.5rem] text-[0.92rem]">
         {added ? (
           <>
             Added.{" "}
