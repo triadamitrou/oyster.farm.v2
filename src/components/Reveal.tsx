@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ElementType, type ReactNode } from "react";
 
-type Mode = "rise" | "fade" | "words" | "port" | "draw";
+type Mode = "rise" | "fade" | "words" | "port" | "draw" | "tile";
 
 /**
  * One observer for the whole document: elements opt in with [data-reveal]

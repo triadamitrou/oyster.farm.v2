@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Title } from "@/components/Bits";
 import Masthead from "@/components/Masthead";
-import { Reveal } from "@/components/Reveal";
+import { Parallax, Reveal } from "@/components/Reveal";
 import { recipes, shuck } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Recipes", description: "How to shuck an oyster, and what to do with it afterwards." };
@@ -37,23 +37,27 @@ export default function Page() {
           <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:mt-12 sm:gap-x-6 lg:grid-cols-4">
             {recipes.map((r, i) => (
               <li key={r.slug} className={i % 2 ? "lg:mt-12" : ""}>
+                {/* Each card rises, settles from an over-scale and unmasks, one
+                    after another, then drifts at its own rate with the scroll. */}
+                <Parallax speed={i % 2 ? -0.06 : 0.05}>
                 <Link href={`/recipes/${r.slug}/`} className="group block">
-                  <div className={`relative overflow-hidden ${i % 2 ? "aspect-square" : "aspect-[4/5]"} ${r.image ? "" : "u-frame"}`}>
+                  <Reveal mode="tile" delay={(i % 4) * 110} className={`relative ${i % 2 ? "aspect-square" : "aspect-[4/5]"} ${r.image ? "" : "u-frame"}`}>
                     {r.image ? (
                       <Image
                         src={r.image}
                         alt={r.alt ?? ""}
                         fill
                         sizes="(min-width:1024px) 23vw, 46vw"
-                        className="object-cover transition-transform duration-[1200ms] group-hover:scale-[1.05]"
+                        className="object-cover"
                       />
                     ) : null}
-                  </div>
+                  </Reveal>
                   <h3 className="u-serif mt-3 text-[1.25rem] leading-snug sm:text-[1.6rem]">{r.title}</h3>
                   <p className="u-cap mt-2 text-[0.6rem] text-bronze sm:text-[0.66rem]">
                     {r.time} &nbsp;&middot;&nbsp; {r.needs}
                   </p>
                 </Link>
+                </Parallax>
               </li>
             ))}
           </ul>

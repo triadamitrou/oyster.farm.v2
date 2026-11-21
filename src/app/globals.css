@@ -208,6 +208,37 @@ body {
   transform: none;
 }
 
+/*
+ * The tile: a photograph card rises, settles from a slight over-scale
+ * and unmasks from the top, so a row of them assembles one by one.
+ */
+[data-reveal="tile"] {
+  overflow: hidden;
+  opacity: 0;
+  transform: translate3d(0, 2.5rem, 0) scale(0.94);
+  transition:
+    opacity 900ms var(--ease-out-expo) var(--d),
+    transform 1100ms var(--ease-out-expo) var(--d);
+}
+[data-reveal="tile"].is-in {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal="tile"] img {
+  transform: scale(1.16);
+  clip-path: inset(8% 0 0 0);
+  transition:
+    transform 1500ms var(--ease-out-expo) var(--d),
+    clip-path 1200ms var(--ease-out-expo) var(--d);
+}
+[data-reveal="tile"].is-in img {
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+a:hover > [data-reveal="tile"].is-in img {
+  transform: scale(1.05);
+}
+
 /* The crescent from the logo, drawing itself. */
 [data-reveal="draw"] path {
   stroke-dasharray: 1;
