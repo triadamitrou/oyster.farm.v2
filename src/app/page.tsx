@@ -36,7 +36,7 @@ export default function Home() {
           />
           <Reveal mode="rise" delay={600} className="mt-10 flex flex-wrap items-center gap-4">
             <Link href="/oysters/" className="u-btn u-btn--sand">
-              Discover the oysters
+              Discover our oysters
             </Link>
             <Link href="/shop/" className="u-btn u-btn--light">
               Shop
@@ -91,10 +91,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Three ways to receive it. */}
+      {/* 4. Three ways to enjoy them. */}
       <section className="bg-shell py-14 sm:py-36">
         <div className="u-wrap">
-          <Title cap="At the table" title="Three ways to receive it" arc className="text-center [&_svg]:mx-auto [&>div]:mx-auto" />
+          <Title cap="At the table" title="Three ways to enjoy" arc className="text-center [&_svg]:mx-auto [&>div]:mx-auto" />
           <div className="mt-10 -mx-[var(--gutter)] flex snap-x snap-mandatory gap-5 overflow-x-auto px-[var(--gutter)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:mt-16 md:grid md:grid-cols-3 md:gap-10 md:overflow-visible md:px-0">
             {serving.map((s, i) => (
               <Reveal key={s.title} mode="rise" delay={i * 140} className={`w-[64vw] shrink-0 snap-start md:w-auto ${i === 1 ? "md:mt-16" : ""}`}>
@@ -117,26 +117,31 @@ export default function Home() {
       {/* 5. Values, in a rail that scrolls sideways. */}
       <ValuesRail />
 
-      {/* 6. Ambassadors: frames for the chefs to come. */}
-      <section className="bg-night py-28 text-ivory sm:py-36">
-        <div className="u-wrap grid gap-12 lg:grid-cols-[1fr_2fr]">
+      {/* 6. Meet the founders. */}
+      <section className="bg-night py-14 text-ivory sm:py-36">
+        <div className="u-wrap grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-12">
           <div>
-            <p className="u-cap text-sand">At the pass</p>
+            <p className="u-cap text-sand">Since {site.since}</p>
             <h2 className="u-serif mt-5 text-[clamp(2.6rem,5vw,4.4rem)]">
-              Meet our <span className="italic">ambassadors</span>
+              Meet the <span className="italic">founders</span>
             </h2>
-            <p className="mt-6 max-w-[34ch] text-ivory/70">
-              The chefs and makers who put the harbour on the plate.
+            <p className="mt-6 max-w-[38ch] text-ivory/75">
+              {house.title}. {house.turn}
             </p>
-            <Link href="/work-with-us/" className="u-btn u-btn--light mt-9">
-              Become one
+            <Link href="/about/" className="u-btn u-btn--light mt-9">
+              About us
             </Link>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            {[0, 1, 2].map((n) => (
-              <Reveal key={n} mode="rise" delay={n * 140}>
-                <div className="u-frame aspect-[3/4] border border-ivory/10" />
-                <div aria-hidden="true" className="mt-4 h-px w-10 bg-sand/60" />
+          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+            {[
+              { src: "/img/founders-boat.jpg", alt: "Lydia and Andy on the farm boat in Portland Harbour" },
+              { src: "/img/founder-beach.jpg", alt: "One of the founders on the beach" },
+              { src: "/img/founder-boat.jpg", alt: "One of the founders at the farm, in oilskins" },
+            ].map((f, n) => (
+              <Reveal key={f.src} mode="rise" delay={n * 140}>
+                <div className="relative aspect-[3/4] overflow-hidden border border-ivory/10">
+                  <Image src={f.src} alt={f.alt} fill sizes="(min-width:1024px) 20vw, 30vw" className="object-cover" />
+                </div>
               </Reveal>
             ))}
           </div>
@@ -165,21 +170,6 @@ export default function Home() {
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      {/* 8. The people. */}
-      <section className="bg-shell py-14 sm:py-36">
-        <div className="u-wrap grid items-center gap-12 md:grid-cols-12">
-          <Photo src="/img/founders-boat.jpg" alt="Lydia and Andy on the farm boat in Portland Harbour" ratio="aspect-square" className="md:col-span-5" />
-          <div className="md:col-span-6 md:col-start-7">
-            <p className="u-cap text-bronze">Since {site.since}</p>
-            <h2 className="u-serif mt-5 text-[clamp(2.6rem,5vw,4.4rem)]">{house.title}</h2>
-            <p className="mt-6 max-w-[46ch] text-[1.08rem] text-ink/75">{house.turn}</p>
-            <Link href="/about/" className="u-btn mt-9">
-              The house
-            </Link>
-          </div>
         </div>
       </section>
     </>

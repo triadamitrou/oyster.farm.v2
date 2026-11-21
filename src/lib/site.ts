@@ -54,7 +54,7 @@ export const nav = [
   { label: "Kelp", href: "/kelp/" },
   { label: "Recipes", href: "/recipes/" },
   { label: "Events", href: "/events/" },
-  { label: "The house", href: "/about/" },
+  { label: "About us", href: "/about/" },
   { label: "Work with us", href: "/work-with-us/" },
 ];
 
@@ -343,6 +343,12 @@ export const shuck = [
 
 export const events = [
   {
+    key: "tasting",
+    kicker: "At the table",
+    title: "Oyster tasting",
+    body: "The farm's oysters opened to order and served on ice, for weddings, parties and private events.",
+  },
+  {
     key: "tours",
     kicker: "On the water",
     title: "Farm tours",
@@ -354,12 +360,6 @@ export const events = [
       { src: "/img/stock-farm-4.jpg", alt: "A sheltered bay with oyster beds along the shore" },
     ],
   },
-  {
-    key: "bar",
-    kicker: "Your event",
-    title: "The oyster bar",
-    body: "A shucker and a raw bar for weddings, parties and private events: iced counter, oysters opened to order.",
-  },
 ];
 
 /**
@@ -368,7 +368,7 @@ export const events = [
  * the farm films its own oyster bar.
  */
 export const inAction = {
-  cap: "Our oyster bar",
+  cap: "Oyster tasting",
   title: "In action",
   body: "A few moments from the table: oysters on ice, opened and laid out to order.",
   clips: [
@@ -403,5 +403,5 @@ export const work = [
   { title: "Fishmongers and shops", body: "Regular supply of oysters, mussels and kelp.", subject: "Retail" },
   { title: "Ambassadors", body: "Chefs and makers who share the farm's way of doing things.", subject: "Ambassadors" },
   { title: "Kelp partners", body: "Food, agriculture, cosmetics and biomaterials.", subject: "Kelp" },
-  { title: "Events", body: "Tours and the oyster bar.", subject: "Events" },
+  { title: "Events", body: "Oyster tastings and farm tours.", subject: "Events" },
 ];

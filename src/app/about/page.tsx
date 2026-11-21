@@ -6,12 +6,12 @@ import { Reveal, Words } from "@/components/Reveal";
 import ValuesRail from "@/components/ValuesRail";
 import { house, site } from "@/lib/site";
 
-export const metadata: Metadata = { title: "The house", description: house.lede };
+export const metadata: Metadata = { title: "About us", description: house.lede };
 
 export default function Page() {
   return (
     <>
-      <Masthead folio="07" cap={`The house, since ${site.since}`} lead="Lydia" em="and Andy" lede={house.lede} />
+      <Masthead folio="07" cap={`About us, since ${site.since}`} lead="Lydia" em="and Andy" lede={house.lede} />
 
       <section className="bg-ivory py-14 sm:py-40">
         <div className="u-wrap grid gap-14 lg:grid-cols-12">

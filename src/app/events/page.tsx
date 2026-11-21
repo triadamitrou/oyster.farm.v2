@@ -4,7 +4,7 @@ import Masthead from "@/components/Masthead";
 import { Reveal } from "@/components/Reveal";
 import { events, inAction, mailto } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Events", description: "Farm tours, and an oyster bar for your own occasion." };
+export const metadata: Metadata = { title: "Events", description: "Oyster tastings for your own occasion, and farm tours on the harbour." };
 
 /**
  * Each event leads with film. The farm has not shot these yet, so each
@@ -14,39 +14,7 @@ export const metadata: Metadata = { title: "Events", description: "Farm tours, a
 export default function Page() {
   return (
     <>
-      <Masthead folio="06" cap="Events" lead="On the" em="water" lede="Farm tours on the harbour, and an oyster bar for your own occasion." />
-
-      {/* In action: four tall tiles of silent, looping film. */}
-      <section aria-labelledby="in-action" className="bg-white py-12 sm:py-28">
-        <div className="u-wrap">
-          <div className="max-w-3xl">
-            <p className="u-cap text-bronze">{inAction.cap}</p>
-            <h2 id="in-action" className="u-serif mt-3 text-[clamp(2rem,3.4vw,2.8rem)]">
-              {inAction.title}
-            </h2>
-            <p className="mt-3 text-ink/65">{inAction.body}</p>
-          </div>
-          <div className="mt-10 grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
-            {inAction.clips.map((c, n) => (
-              <Reveal key={c.src} mode="rise" delay={n * 90}>
-                <div className="aspect-[3/4] overflow-hidden bg-shell">
-                  <video
-                    className="h-full w-full object-cover"
-                    src={c.src}
-                    poster={c.poster}
-                    muted
-                    loop
-                    playsInline
-                    autoPlay
-                    preload="metadata"
-                    aria-label={c.label}
-                  />
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Masthead folio="06" cap="Events" lead="On the" em="water" lede="Oyster tastings for your own occasion, and farm tours on the harbour." />
 
       {events.map((e, i) => (
         <section key={e.key} id={e.key} className={`scroll-mt-20 py-12 sm:py-24 ${i % 2 ? "bg-shell" : "bg-ivory"}`}>
@@ -66,6 +34,22 @@ export default function Page() {
               </div>
             </div>
 
+            {e.key === "tasting" ? (
+              /* The tasting in action: four tall tiles of silent, looping film. */
+              <div className="mt-10">
+                <p className="u-cap text-bronze">{inAction.title}</p>
+                <div className="mt-4 grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
+                  {inAction.clips.map((c, n) => (
+                    <Reveal key={c.src} mode="rise" delay={n * 90}>
+                      <div className="aspect-[4/5] overflow-hidden bg-shell lg:aspect-[3/4]">
+                        <video className="h-full w-full object-cover" src={c.src} poster={c.poster} muted loop playsInline autoPlay preload="metadata" aria-label={c.label} />
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <>
             {/* One low strip: the film frame, then the stills, all the same modest height. */}
             <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-6 sm:gap-4">
               <Reveal mode="fade" className="col-span-2">
@@ -85,6 +69,8 @@ export default function Page() {
                 </Reveal>
               ))}
             </div>
+              </>
+            )}
           </div>
         </section>
       ))}

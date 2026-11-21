@@ -64,7 +64,7 @@ export default function Header() {
               key={n.href}
               href={n.href}
               aria-current={pathname?.startsWith(n.href.replace(/\/$/, "")) ? "page" : undefined}
-              className="u-cap opacity-90 transition-opacity hover:opacity-100 aria-[current=page]:text-bronze"
+              className="u-cap text-[0.7rem] tracking-[0.3em] opacity-90 transition-opacity hover:opacity-100 aria-[current=page]:text-bronze"
             >
               {n.label}
             </Link>

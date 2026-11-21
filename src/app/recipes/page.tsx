@@ -11,27 +11,10 @@ export const metadata: Metadata = { title: "Recipes", description: "How to shuck
 export default function Page() {
   return (
     <>
-      <Masthead folio="05" cap="Recipes" lead="In the" em="kitchen" lede="How to open an oyster, and what to do with it afterwards." />
-
-      {/* How to shuck: four numbered moves. */}
-      <section id="shuck" className="scroll-mt-24 bg-ivory py-14 sm:py-36">
-        <div className="u-wrap">
-          <Title cap="First things first" title="How to shuck" arc />
-          <p className="mt-6 max-w-[52ch] text-ink/70">An oyster knife, a folded cloth and a steady board. Never a kitchen knife.</p>
-          <ol className="mt-10 grid grid-cols-2 gap-px bg-ink/15 sm:mt-16 lg:grid-cols-4">
-            {shuck.map((s, i) => (
-              <Reveal as="li" key={s.title} mode="rise" delay={i * 110} className="bg-ivory p-5 sm:p-8">
-                <span className="u-serif text-[2.4rem] italic leading-none text-bronze sm:text-[3.4rem]">{["I", "II", "III", "IV"][i]}</span>
-                <h3 className="u-serif mt-6 text-[1.9rem]">{s.title}</h3>
-                <p className="mt-3 text-ink/70">{s.body}</p>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <Masthead folio="05" cap="Recipes" lead="In the" em="kitchen" lede="Four recipes from the harbour, and how to open an oyster." />
 
       {/* The recipes: photographs to click, a title, the time and what it needs. */}
-      <section className="bg-shell py-12 sm:py-28">
+      <section className="bg-ivory pb-12 sm:pb-28">
         <div className="u-wrap">
           <Title cap="From the harbour" title="Four to begin with" />
           <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:mt-12 sm:gap-x-6 lg:grid-cols-4">
@@ -61,6 +44,23 @@ export default function Page() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* How to shuck: four numbered moves. */}
+      <section id="shuck" className="scroll-mt-24 bg-shell py-14 sm:py-36">
+        <div className="u-wrap">
+          <Title cap="Good to know" title="How to shuck" arc />
+          <p className="mt-6 max-w-[52ch] text-ink/70">An oyster knife, a folded cloth and a steady board. Never a kitchen knife.</p>
+          <ol className="mt-10 grid grid-cols-2 gap-px bg-ink/15 sm:mt-16 lg:grid-cols-4">
+            {shuck.map((s, i) => (
+              <Reveal as="li" key={s.title} mode="rise" delay={i * 110} className="bg-shell p-5 sm:p-8">
+                <span className="u-serif text-[2.4rem] italic leading-none text-bronze sm:text-[3.4rem]">{["I", "II", "III", "IV"][i]}</span>
+                <h3 className="u-serif mt-6 text-[1.9rem]">{s.title}</h3>
+                <p className="mt-3 text-ink/70">{s.body}</p>
+              </Reveal>
+            ))}
+          </ol>
         </div>
       </section>
     </>

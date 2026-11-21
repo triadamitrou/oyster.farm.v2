@@ -68,9 +68,9 @@ body {
 /* Small tracked capitals, the house's labels. */
 .u-cap {
   font-family: var(--font-sans), sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.88rem;
   font-weight: 450;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
 }
 
